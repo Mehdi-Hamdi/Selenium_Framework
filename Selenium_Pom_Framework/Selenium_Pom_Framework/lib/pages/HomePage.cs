@@ -1,33 +1,45 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 
 namespace SL_Pom_Framework_Test.lib.pages;
 
 public class HomePage
 {
-    
+    private IWebDriver _driver;
+
+    #region web elements
+    // move my elements to private fields so I can reuse them
+    #endregion
+
     public HomePage(IWebDriver seleniumDriver)
     {
-
+        _driver = seleniumDriver;
     }
     public void VisitHomePage()
     {
-        throw new NotImplementedException();
+        _driver.Navigate().GoToUrl(AppConfigReader.BaseUrl);
     }
 
-    internal void ClickLoginButton()
+    public void ClickLoginButton()
     {
-        throw new NotImplementedException();
+        var loginButton = _driver.FindElement(By.Id("login-button"));
+        loginButton.Click();
     }
 
-    internal void EnterPassword(string password)
+    public void EnterPassword(string password)
     {
-        throw new NotImplementedException();
+        var passwordElement = _driver.FindElement(By.Id("password"));
+        passwordElement.SendKeys(password);
     }
 
-    internal void EnterUserName(string userName)
+    public void EnterUserName(string userName)
     {
-        throw new NotImplementedException();
+        var userNameElement = _driver.FindElement(By.Id("user-name"));
+        userNameElement.SendKeys(userName);
+    }
+
+    public string GetErrorMessage()
+    {
+        var errorMessage = _driver.FindElement(By.ClassName("error-message-container")).FindElement(By.TagName("h3"));
+        return errorMessage.Text;
     }
 }
