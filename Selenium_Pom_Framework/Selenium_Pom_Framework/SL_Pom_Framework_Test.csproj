@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="lib\driver_config\" />
-    <Folder Include="lib\pages\" />
   </ItemGroup>
 
 </Project>
